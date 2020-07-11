@@ -306,7 +306,7 @@ Start the process if needed."
       (error "Something bad happened to the mu server process")))))
 
 (defun mu4e~call-mu (form)
-  "Call 'mu' with some command."
+  "Call 'mu' with some command defined by FORM."
   (unless (mu4e~proc-running-p) (mu4e~proc-start))
   (let ((cmd (format "%S" form)))
     (mu4e-log 'to-server "%s" cmd)

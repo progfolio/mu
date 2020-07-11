@@ -30,6 +30,12 @@
 
 (require 'org)
 
+(declare-function mu4e-last-query                   "mu4e-utils")
+(declare-function mu4e-error                        "mu4r-utils")
+(declare-function mu4e-message-at-point             "mu4e-message")
+(declare-function mu4e-headers-search               "mu4e-headers")
+(declare-function mu4e-view-message-with-message-id "mu4e-view")
+
 (defgroup mu4e-org nil
   "Settings for the org-mode related functionality in mu4e."
   :group 'mu4e
@@ -51,7 +57,7 @@ the current query; otherwise, it links to the message at point.")
    :description (format "[%s]" (mu4e-last-query))))
 
 (defun mu4e~org-address (cell)
-  "Get address field FIELD from MSG as a string or nil."
+  "Get address field FIELD from CELL as a string or nil."
   (let ((name (car cell)) (addr (cdr cell)))
     (if name
         (format "%s <%s>" name addr)

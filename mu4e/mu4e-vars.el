@@ -36,8 +36,8 @@
   :group 'mail)
 
 (defcustom mu4e-mu-home nil
-  "Location of an alternate mu home dir. If not set, use the
-defaults, based on the XDG Base Directory Specification."
+  "Location of an alternate mu home dir.
+If not set, use the defaults, based on the XDG Base Directory Specification."
   :group 'mu4e
   :type '(choice (const :tag "Default location" nil)
                  (directory :tag "Specify location"))
@@ -61,7 +61,7 @@ Setting this to t increases the amount of information in the log."
                         "determined by server; see `mu4e-root-maildir'." "1.3.8")
 
 (defcustom mu4e-org-support t
-  "Support org-mode links."
+  "Support `org-mode' links."
   :type 'boolean
   :group 'mu4e)
 
@@ -145,16 +145,15 @@ some specific setting.")
   :group 'mu4e)
 
 (defcustom mu4e-headers-include-related t
-  "With this option set to non-nil, not just return the matches for
-a searches, but also messages that are related (through their
-references) to these messages. This can be useful e.g. to include
-sent messages into message threads."
+  "When non-nil, return related messages with search results.
+Related messages are obtained through message references.
+This can be useful to include sent messages in message threads."
   :type 'boolean
   :group 'mu4e-headers)
 
 (defcustom mu4e-headers-skip-duplicates t
-  "With this option set to non-nil, show only one of duplicate
-messages. This is useful when you have multiple copies of the same
+  "With non-nil, hide duplicate messages.
+This is useful when you have multiple copies of the same
 message, which is a common occurrence for example when using Gmail
 and offlineimap."
   :type 'boolean
@@ -220,9 +219,9 @@ If the string exceeds this limit, it will be truncated to fit."
 ;; for backward compatibility, when a bookmark was defined with defstruct.
 (cl-defun make-mu4e-bookmark (&key name query key)
   "Create a mu4e proplist with the following elements:
-- `name': the user-visible name of the bookmark
-- `key': a single key to search for this bookmark
-- `query': the query for this bookmark. Either a literal string or a function
+- `name': the user-visible NAME of the bookmark
+- `key': a single KEY to search for this bookmark
+- `query': the QUERY for this bookmark. Either a literal string or a function
    that evaluates to a string."
   `(:name ,name :query ,query :key ,key))
 (make-obsolete 'make-mu4e-bookmark "`unneeded; `mu4e-bookmarks'
@@ -270,8 +269,7 @@ differ from the number you get from a 'real' query."
 
 
 (defun mu4e-bookmarks ()
-  "Get `mu4e-bookmarks' in the (new) format, converting from the
-old format if needed."
+  "Get `mu4e-bookmarks', converting from the old format if needed."
   (cl-map 'list
           (lambda (item)
             (if (and (listp item) (= (length item) 3))
@@ -621,8 +619,7 @@ NOT be quoted, since mu4e does this for you."
 
 
 (defun mu4e-maildir-shortcuts ()
-  "Get `mu4e-maildir-shortcuts' in the (new) format, converting
-from the old format if needed."
+  "Get `mu4e-maildir-shortcuts', converting from the old format if needed."
   (cl-map 'list
           (lambda (item) ;; convert from old format?
             (if (and (consp item) (not (consp (cdr item))))
@@ -992,8 +989,8 @@ including, for instance, the message body.")
 ;;;; Main
 
 (defvar mu4e-main-buffer-name " *mu4e-main*"
-  "Name of the mu4e main view buffer. The default name starts
-with SPC and therefore is not visible in buffer list.")
+  "Name of the mu4e main view buffer.
+The default name starts with SPC and therefore is not visible in buffer list.")
 
 
 ;;;; Headers
@@ -1028,15 +1025,15 @@ mu4e-compose.")
   (let ((root-maildir (and mu4e~server-props
                            (plist-get mu4e~server-props :root-maildir))))
     (unless root-maildir
-      (mu4e-error "root maildir unknown; did you start mu4e?"))
+      (mu4e-error "Uknown root maildir; did you start mu4e?"))
     root-maildir))
 
 (defun mu4e-database-path()
-  "Get the mu4e database path"
+  "Get the mu4e database path."
   (let ((path (and mu4e~server-props
                    (plist-get mu4e~server-props :database-path))))
     (unless path
-      (mu4e-error "database-path unknown; did you start mu4e?"))
+      (mu4e-error "Uknown database-path; did you start mu4e?"))
     path))
 
 (defun mu4e-personal-addresses()
@@ -1047,7 +1044,7 @@ mu4e-compose.")
   "Get the server version, which should match mu4e's."
   (let ((version (and mu4e~server-props (plist-get mu4e~server-props :version))))
     (unless version
-      (mu4e-error "version unknown; did you start mu4e?"))
+      (mu4e-error "Uknown version; did you start mu4e?"))
     version))
 
 

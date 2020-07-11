@@ -31,6 +31,10 @@
 (require 'flow-fill)
 (require 'shr)
 
+(declare-function mu4e-error          "mu4r-utils")
+(declare-function mu4e-warn           "mu4r-utils")
+(declare-function mu4e-make-temp-file "mu4r-utils")
+
 (defvar mu4e~view-message)
 (defvar shr-inhibit-images)
 

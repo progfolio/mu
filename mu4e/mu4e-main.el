@@ -33,10 +33,10 @@
 ;;; Mode
 
 (defvar mu4e-main-buffer-hide-personal-addresses nil
-  "Whether to hide the personal address in the main view. This
-  can be useful to avoid the noise when there are many.
+  "Whether to hide the personal address in the main view.
+This can be useful to avoid noise when there are many.
 
-  This also hides the warning if your `user-mail-address' is not
+This also hides the warning if `user-mail-address' is not
 part of the personal addresses.")
 
 (defvar mu4e-main-hide-fully-read nil
@@ -86,10 +86,9 @@ no unread messages.")
 
 (defun mu4e~main-action-str (str &optional func-or-shortcut)
   "Highlight the first occurrence of [.] in STR.
-If FUNC-OR-SHORTCUT is non-nil and if it is a function, call it
-when STR is clicked (using RET or mouse-2); if FUNC-OR-SHORTCUT is
-a string, execute the corresponding keyboard action when it is
-clicked."
+If FUNC-OR-SHORTCUT is a function, call it when STR is clicked.
+If FUNC-OR-SHORTCUT is a string, execute the corresponding keyboard action when
+it is clicked."
   (let ((newstr
          (replace-regexp-in-string
           "\\[\\(..?\\)\\]"
@@ -119,6 +118,7 @@ clicked."
 
 
 (defun mu4e~main-bookmarks ()
+  "Return bookmarks string for main view."
   ;; TODO: it's a bit uncool to hard-code the "b" shortcut...
   (cl-loop with bmks = (mu4e-bookmarks)
            with longest = (mu4e~longest-of-maildirs-and-bookmarks)
@@ -196,7 +196,8 @@ clicked."
 
 
 (defun mu4e~key-val (key val &optional unit)
-  "Return a key / value pair."
+  "Return a KEY VAL pair string.
+If UNIT is non-nil it is appended to the pair."
   (concat
    "\t* "
    (propertize (format "%-20s" key) 'face 'mu4e-header-title-face)
@@ -223,6 +224,7 @@ When REFRESH is non nil refresh infos from server."
       (mu4e~main-redraw-buffer))))
 
 (defun mu4e~main-redraw-buffer ()
+  "Redraw the main mu4e buffer."
   (with-current-buffer mu4e-main-buffer-name
     (let ((inhibit-read-only t)
           (pos (point))
@@ -346,7 +348,7 @@ When REFRESH is non nil refresh infos from server."
       (revert-buffer))))
 
 (defun mu4e~main-menu ()
-  "mu4e main view in the minibuffer."
+  "Display the mu4e main view in the minibuffer."
   (interactive)
   (let ((key
          (read-key
